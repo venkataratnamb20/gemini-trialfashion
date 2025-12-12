@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Sparkles, Check, Plus, Star } from 'lucide-react';
 import { Product } from '../../types';
@@ -12,6 +13,7 @@ interface ProductCardProps {
 
 export const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode = 'grid' }) => {
   const { openVTON, toggleProductSelection, selectedProducts } = useShop();
+  const [imgSrc, setImgSrc] = useState(product.image);
 
   const isSelected = selectedProducts.some(p => p.id === product.id);
 
@@ -21,16 +23,21 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode = 'g
     toggleProductSelection(product);
   };
 
+  const handleError = () => {
+    setImgSrc('https://via.placeholder.com/400x600?text=Image+Not+Found');
+  };
+
   if (viewMode === 'list') {
     return (
       <div className={`group relative flex flex-row gap-4 p-4 border border-gray-100 rounded-lg bg-white hover:shadow-md transition-shadow ${isSelected ? 'ring-2 ring-accent' : ''}`}>
         {/* Image Section */}
         <div className="relative w-32 h-40 flex-shrink-0 overflow-hidden bg-gray-100 rounded-md">
            <img 
-            src={product.image} 
+            src={imgSrc} 
             alt={product.name} 
             className="h-full w-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
             loading="lazy"
+            onError={handleError}
           />
            <button 
             onClick={handleSelection}
@@ -108,10 +115,11 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, viewMode = 'g
         </button>
 
         <img 
-          src={product.image} 
+          src={imgSrc} 
           alt={product.name} 
           className="h-full w-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
           loading="lazy"
+          onError={handleError}
         />
         
         {/* Quick VTON Action */}

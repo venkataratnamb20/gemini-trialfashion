@@ -17,10 +17,11 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     subCategory: 'Western Wear',
     rating: 4.6,
     reviews: 15420,
-    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1000&auto=format&fit=crop',
+    // FIXED: Changed from man's image to woman's image
+    image: 'https://images.unsplash.com/photo-1529139574466-a302c27e3844?q=80&w=1000&auto=format&fit=crop',
     images: [
-        'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1620799140408-ed5341cd2431?q=80&w=1000&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1529139574466-a302c27e3844?q=80&w=1000&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1554568218-0f1715e72254?q=80&w=1000&auto=format&fit=crop',
     ],
     description: 'The essential everyday t-shirt. Breathable, soft, and pre-shrunk for the perfect fit wash after wash. #1 Best Seller in Women\'s T-Shirts.'
   },
@@ -47,9 +48,10 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     subCategory: 'Ethnic Wear',
     rating: 4.5,
     reviews: 850,
-    image: 'https://images.unsplash.com/photo-1583391733952-4c310280b88c?q=80&w=1000&auto=format&fit=crop',
+    // FIXED: Updated to a reliable image link for ethnic wear
+    image: 'https://images.unsplash.com/photo-1605908502724-9b432a436964?q=80&w=1000&auto=format&fit=crop',
     images: [
-        'https://images.unsplash.com/photo-1583391733952-4c310280b88c?q=80&w=1000&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1605908502724-9b432a436964?q=80&w=1000&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1583391733975-04536769062b?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Elegant floor-length Anarkali kurta with embroidery. Includes matching dupatta and leggings. Perfect for festive occasions.'

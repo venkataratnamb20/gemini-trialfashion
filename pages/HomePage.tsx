@@ -1,6 +1,7 @@
 
 import React, { useState, useMemo, useEffect, useRef } from 'react';
 import { Sparkles, ShoppingBag, Loader2, RefreshCw, LayoutGrid, List, ChevronLeft, ChevronRight, Upload, Camera, Shirt, ArrowRight, User } from 'lucide-react';
+import { useLocation } from 'react-router-dom';
 import { ProductService } from '../services/productService'; 
 import { ProductCard } from '../components/Shop/ProductCard';
 import { useShop } from '../context/ShopContext';
@@ -41,6 +42,19 @@ export const HomePage: React.FC = () => {
   const modelInputRef = useRef<HTMLInputElement>(null);
   const apparelInputRef = useRef<HTMLInputElement>(null);
   const [demoIndex, setDemoIndex] = useState(0);
+
+  const location = useLocation();
+
+  // Scroll to section logic on mount/update
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  }, [location, products]); // Check after products load
 
   // Animation Loop for Hero Image
   useEffect(() => {

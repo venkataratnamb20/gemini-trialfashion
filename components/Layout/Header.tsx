@@ -1,21 +1,35 @@
+
 import React from 'react';
 import { ShoppingBag, Search, Menu } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useShop } from '../../context/ShopContext';
 
 export const Header: React.FC = () => {
   const { cart } = useShop();
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
   const location = useLocation();
+  const navigate = useNavigate();
 
-  const scrollToShop = (e: React.MouseEvent) => {
-    // If we are on home page, scroll. If not, normal navigation will handle it (if we linked to /#shop-section)
-    if (location.pathname === '/') {
-      e.preventDefault();
-      const element = document.getElementById('shop-section');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }
+  const handleNavClick = (e: React.MouseEvent, sectionId?: string) => {
+    e.preventDefault();
+    
+    const scrollToSection = () => {
+       if (sectionId) {
+           const element = document.getElementById(sectionId);
+           if (element) {
+               element.scrollIntoView({ behavior: 'smooth' });
+           }
+       } else {
+           window.scrollTo({ top: 0, behavior: 'smooth' });
+       }
+    };
+
+    if (location.pathname !== '/') {
+        navigate('/');
+        // Wait for navigation to complete before scrolling
+        setTimeout(scrollToSection, 100);
+    } else {
+        scrollToSection();
     }
   };
 
@@ -33,10 +47,10 @@ export const Header: React.FC = () => {
           </div>
 
           <nav className="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-widest text-gray-500">
-            <a href="/#shop-section" onClick={scrollToShop} className="hover:text-black transition-colors">New Arrivals</a>
-            <a href="/#shop-section" onClick={scrollToShop} className="hover:text-black transition-colors">Clothing</a>
-            <a href="/#shop-section" onClick={scrollToShop} className="hover:text-black transition-colors">Accessories</a>
-            <Link to="/" className="hover:text-black transition-colors">Editorial</Link>
+            <button onClick={(e) => handleNavClick(e, 'shop-section')} className="hover:text-black transition-colors focus:outline-none">New Arrivals</button>
+            <button onClick={(e) => handleNavClick(e, 'shop-section')} className="hover:text-black transition-colors focus:outline-none">Clothing</button>
+            <button onClick={(e) => handleNavClick(e, 'shop-section')} className="hover:text-black transition-colors focus:outline-none">Accessories</button>
+            <button onClick={(e) => handleNavClick(e)} className="hover:text-black transition-colors focus:outline-none">Editorial</button>
           </nav>
 
           <div className="flex items-center space-x-4">

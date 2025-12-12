@@ -81,9 +81,11 @@ export const VTONModal: React.FC = () => {
 
       setVTONGeneratedImage(resultImage);
       setVTONStage(VTONStage.RESULT);
-    } catch (err) {
+    } catch (err: any) {
       console.error(err);
-      setVTONError('Failed to generate virtual try-on. Please try again.');
+      // Use the actual error message if available (e.g. Safety Block), otherwise generic
+      const errorMessage = err instanceof Error ? err.message : 'Failed to generate virtual try-on. Please try again.';
+      setVTONError(errorMessage);
       setVTONStage(VTONStage.UPLOAD);
     }
   };

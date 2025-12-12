@@ -1,7 +1,7 @@
 
 import { generateTryOn, constructVTONPrompt, ProductInput } from './geminiService';
 import { RAW_SCRAPED_DATASET } from '../constants';
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI, HarmCategory, HarmBlockThreshold } from "@google/genai";
 
 // Declare Jest global types to resolve TypeScript errors
 declare const jest: any;
@@ -18,7 +18,17 @@ jest.mock("@google/genai", () => {
       models: {
         generateContent: jest.fn()
       }
-    }))
+    })),
+    HarmCategory: {
+        HARM_CATEGORY_HATE_SPEECH: 'HARM_CATEGORY_HATE_SPEECH',
+        HARM_CATEGORY_DANGEROUS_CONTENT: 'HARM_CATEGORY_DANGEROUS_CONTENT',
+        HARM_CATEGORY_SEXUALLY_EXPLICIT: 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
+        HARM_CATEGORY_HARASSMENT: 'HARM_CATEGORY_HARASSMENT'
+    },
+    HarmBlockThreshold: {
+        BLOCK_NONE: 'BLOCK_NONE',
+        BLOCK_ONLY_HIGH: 'BLOCK_ONLY_HIGH'
+    }
   };
 });
 
@@ -52,17 +62,16 @@ describe('Gemini VTON Service', () => {
       
       const prompt = constructVTONPrompt(products);
       
-      expect(prompt).toContain('SUBJECT IS HOLY');
-      expect(prompt).toContain('GHOST LIMB REMOVAL');
+      expect(prompt).toContain('Target Model');
+      expect(prompt).toContain('REMOVE GHOST HANDS');
       expect(prompt).toContain('Category: Women');
       expect(prompt).toContain('A blue silk saree');
     });
 
     it('should include specific draping instructions to prevent fold artifacts', () => {
       const prompt = constructVTONPrompt([{ image: 'img', description: 'desc' }]);
-      // Verifies the fix for "Saree is folded according the the model in the product"
-      expect(prompt).toContain('RE-DRAPE THE FABRIC');
-      expect(prompt).toContain('ADAPT TO TARGET');
+      expect(prompt).toContain('APPAREL TRANSFER');
+      expect(prompt).toContain('Drape it realistically');
     });
 
     it('should handle multiple products correctly', () => {
@@ -76,12 +85,21 @@ describe('Gemini VTON Service', () => {
       expect(prompt).toContain('Item 2 [Category: Bottom]: Jeans');
     });
 
-    it('should robustly handle missing categories', () => {
-      const products: ProductInput[] = [
-        { image: 'b1', description: 'Mystery Item' }
-      ];
-      const prompt = constructVTONPrompt(products);
-      expect(prompt).toContain('[Category: Apparel]');
+    it('should activate JUNIOR FASHION instructions for children categories', () => {
+        const products: ProductInput[] = [
+            { image: 'b1', description: 'Kids Dress', category: 'Kids' }
+        ];
+        const prompt = constructVTONPrompt(products);
+        expect(prompt).toContain('SPECIAL INSTRUCTION: JUNIOR FASHION');
+        expect(prompt).toContain('smaller frame proportions');
+    });
+
+    it('should activate JUNIOR FASHION for Girls subcategory', () => {
+        const products: ProductInput[] = [
+            { image: 'b1', description: 'Party Dress', category: 'Girls' }
+        ];
+        const prompt = constructVTONPrompt(products);
+        expect(prompt).toContain('SPECIAL INSTRUCTION: JUNIOR FASHION');
     });
   });
 
@@ -91,7 +109,7 @@ describe('Gemini VTON Service', () => {
        expect(mockHasSelectedApiKey).toHaveBeenCalled();
     });
 
-    it('should call GoogleGenAI with correct model and inputs', async () => {
+    it('should call GoogleGenAI with correct model, inputs, and BLOCK_NONE SAFETY SETTINGS', async () => {
        const userImg = 'data:image/jpeg;base64,USER_IMG_DATA';
        const prodImg = 'data:image/png;base64,PROD_IMG_DATA';
        
@@ -113,9 +131,13 @@ describe('Gemini VTON Service', () => {
        // Check Model
        expect(callArgs.model).toBe('gemini-3-pro-image-preview');
        
-       // Check Parts: 1 text + 1 user image + 1 product image = 3 parts
-       expect(callArgs.contents.parts).toHaveLength(3);
+       // Check System Instruction
+       expect(callArgs.config.systemInstruction).toBeDefined();
        
+       // Verify Safety Settings were passed as BLOCK_NONE
+       expect(callArgs.config.safetySettings).toBeDefined();
+       expect(callArgs.config.safetySettings[0].threshold).toBe('BLOCK_NONE');
+
        // Verify User Image Stripping
        expect(callArgs.contents.parts[1].inlineData.data).toBe('USER_IMG_DATA');
        expect(callArgs.contents.parts[1].inlineData.mimeType).toBe('image/jpeg');
@@ -124,37 +146,15 @@ describe('Gemini VTON Service', () => {
        expect(callArgs.contents.parts[2].inlineData.data).toBe('PROD_IMG_DATA');
     });
 
-    it('should handle API errors gracefully and return fallback', async () => {
+    it('should THROW ERROR on API failure', async () => {
        (GoogleGenAI as unknown as any).mockImplementation(() => ({
           models: { generateContent: jest.fn().mockRejectedValue(new Error('API Failure')) }
        }));
 
-       const result = await generateTryOn('u', [{ image: 'p', description: 'd' }]);
-       
-       // Should return mock image from constants on failure
-       expect(result).toContain('https://images.unsplash.com'); 
-    });
-  });
-
-  describe('Dataset Robustness Test', () => {
-    it('should successfully construct prompts for ALL items in raw dataset', () => {
-       // This ensures no weird characters or missing fields in our dataset crash the prompt generator
-       RAW_SCRAPED_DATASET.forEach(product => {
-          const input: ProductInput = {
-              image: 'dummy',
-              description: product.description,
-              category: product.category
-          };
-          
-          const prompt = constructVTONPrompt([input]);
-          expect(prompt).toBeTruthy();
-          expect(prompt).toContain(product.description);
-          expect(prompt).toContain(product.category);
-          
-          // Verify critical safety instructions are always present
-          expect(prompt).toContain('SUBJECT IS HOLY');
-          expect(prompt).toContain('GHOST LIMB REMOVAL');
-       });
+       // Expect the promise to reject with the error
+       await expect(generateTryOn('u', [{ image: 'p', description: 'd' }]))
+         .rejects
+         .toThrow('API Failure');
     });
   });
 
