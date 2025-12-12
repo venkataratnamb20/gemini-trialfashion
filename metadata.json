@@ -1,0 +1,8 @@
+{
+  "name": "LUMIÈRE | AI Virtual Try-On Store",
+  "description": "A high-end e-commerce experience featuring AI-powered virtual try-on technology using Google Gemini models.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
