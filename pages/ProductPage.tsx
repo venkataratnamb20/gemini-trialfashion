@@ -117,13 +117,15 @@ export const ProductPage: React.FC = () => {
       const reader = new FileReader();
       reader.onload = (event) => {
         const base64 = event.target?.result as string;
-        // Set state for VTON
-        setVTONUserImage(base64);
         
-        // Setup context for processing
+        // CRITICAL FIX: Order matters.
+        // 1. Open VTON first (resets state)
         openVTON([product]); 
         
-        // Auto-start processing
+        // 2. Set User Image
+        setVTONUserImage(base64);
+        
+        // 3. Auto-start processing
         setVTONStage(VTONStage.PROCESSING);
       };
       reader.readAsDataURL(file);

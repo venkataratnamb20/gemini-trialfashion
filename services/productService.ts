@@ -5,8 +5,8 @@ import { RAW_SCRAPED_DATASET } from '../constants';
 // --- DATABASE SIMULATION ---
 // In a real app, this would be a MongoDB or PostgreSQL connection.
 // Here we use localStorage to persist the "scraped" data.
-// UPDATED: Version 3 to invalidate old cache with broken images and new array structure.
-const DB_KEY = 'trial_fashion_db_v3';
+// UPDATED: Version 4 to invalidate old cache with broken images.
+const DB_KEY = 'trial_fashion_db_v4';
 
 export const ProductService = {
   

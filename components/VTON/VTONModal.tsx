@@ -1,5 +1,6 @@
+
 import React, { useRef, useState, useEffect } from 'react';
-import { Upload, Sparkles, AlertCircle, ShoppingBag, Plus, Minus, RotateCcw, ChevronLeft, ChevronRight, User } from 'lucide-react';
+import { Upload, Sparkles, AlertCircle, ShoppingBag, Plus, Minus, RotateCcw, ChevronLeft, ChevronRight, User, X } from 'lucide-react';
 import { Modal } from '../ui/Modal';
 import { Button } from '../ui/Button';
 import { useShop } from '../../context/ShopContext';
@@ -308,47 +309,6 @@ export const VTONModal: React.FC = () => {
             )}
           </div>
         </div>
-        
-        {/* Floating Zoom Controls & Counter */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-black/80 backdrop-blur-md p-1.5 rounded-full text-white shadow-xl z-30 border border-white/10">
-          
-          {/* Image Counter */}
-          {vtonState.galleryImages.length > 1 && (
-            <div className="flex items-center pl-2 pr-3 mr-1 border-r border-white/20 h-5">
-              <span className="text-xs font-mono font-medium select-none text-gray-200">
-                {vtonState.activeGalleryIndex + 1}<span className="text-gray-500">/</span>{vtonState.galleryImages.length}
-              </span>
-            </div>
-          )}
-
-          <button 
-            onClick={handleZoomOut} 
-            disabled={zoom <= 1}
-            className="p-2 hover:bg-white/20 rounded-full disabled:opacity-50 transition-colors"
-            title="Zoom Out"
-          >
-            <Minus size={16} />
-          </button>
-          <span className="text-xs font-mono font-medium min-w-[3ch] text-center select-none">
-            {Math.round(zoom * 100)}%
-          </span>
-          <button 
-            onClick={handleZoomIn} 
-            disabled={zoom >= 4}
-            className="p-2 hover:bg-white/20 rounded-full disabled:opacity-50 transition-colors"
-            title="Zoom In"
-          >
-            <Plus size={16} />
-          </button>
-          <div className="w-px h-4 bg-white/20 mx-1" />
-          <button 
-            onClick={handleResetZoom} 
-            className="p-2 hover:bg-white/20 rounded-full transition-colors"
-            title="Reset View"
-          >
-            <RotateCcw size={16} />
-          </button>
-        </div>
       </div>
       
       {/* Footer Actions */}
@@ -395,15 +355,22 @@ export const VTONModal: React.FC = () => {
   return (
     <Modal 
       isOpen={vtonState.isOpen} 
-      onClose={closeVTON} 
-      fullScreen 
-      className="bg-white"
+      onClose={closeVTON}
+      fullScreen={vtonState.stage === VTONStage.RESULT}
     >
-       {vtonState.error && (
-        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-50 bg-red-50 text-red-600 px-4 py-3 rounded-lg shadow-lg flex items-center border border-red-100">
-          <AlertCircle className="w-5 h-5 mr-2" />
-          {vtonState.error}
-          <button onClick={() => setVTONError(null)} className="ml-4 font-bold hover:text-red-800">Dismiss</button>
+      {/* Error Toast */}
+      {vtonState.error && (
+        <div className="absolute top-4 left-1/2 -translate-x-1/2 z-[60] max-w-sm w-full px-4">
+            <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg shadow-lg flex items-start gap-3">
+                <AlertCircle className="w-5 h-5 flex-shrink-0 mt-0.5" />
+                <div className="flex-1">
+                    <h4 className="text-sm font-bold">Error</h4>
+                    <p className="text-xs mt-1">{vtonState.error}</p>
+                </div>
+                <button onClick={() => setVTONError(null)} className="text-red-400 hover:text-red-600">
+                    <X className="w-4 h-4" />
+                </button>
+            </div>
         </div>
       )}
 

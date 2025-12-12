@@ -17,11 +17,10 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     subCategory: 'Western Wear',
     rating: 4.6,
     reviews: 15420,
-    image: 'https://images.unsplash.com/photo-1529139574466-a302d2053990?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1000&auto=format&fit=crop',
     images: [
-        'https://images.unsplash.com/photo-1529139574466-a302d2053990?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1529139574466-a302d2053990?q=80&w=1000&auto=format&fit=crop&crop=top',
-        'https://images.unsplash.com/photo-1529139574466-a302d2053990?q=80&w=1000&auto=format&fit=crop&crop=bottom'
+        'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1000&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1620799140408-ed5341cd2431?q=80&w=1000&auto=format&fit=crop',
     ],
     description: 'The essential everyday t-shirt. Breathable, soft, and pre-shrunk for the perfect fit wash after wash. #1 Best Seller in Women\'s T-Shirts.'
   },
@@ -36,7 +35,6 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1000&auto=format&fit=crop',
     images: [
         'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=1000&auto=format&fit=crop&crop=left',
         'https://images.unsplash.com/photo-1475178626620-a4d074967452?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Designed to smooth and enhance, these mid-rise skinny jeans feature a tummy-slimming panel and high-stretch denim.'
@@ -49,10 +47,9 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     subCategory: 'Ethnic Wear',
     rating: 4.5,
     reviews: 850,
-    image: 'https://images.unsplash.com/photo-1605908586129-847321ef8849?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1583391733952-4c310280b88c?q=80&w=1000&auto=format&fit=crop',
     images: [
-        'https://images.unsplash.com/photo-1605908586129-847321ef8849?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1605908586129-847321ef8849?q=80&w=1000&auto=format&fit=crop&crop=top',
+        'https://images.unsplash.com/photo-1583391733952-4c310280b88c?q=80&w=1000&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1583391733975-04536769062b?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Elegant floor-length Anarkali kurta with embroidery. Includes matching dupatta and leggings. Perfect for festive occasions.'
@@ -65,11 +62,10 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     subCategory: 'Ethnic Wear',
     rating: 4.3,
     reviews: 2100,
-    image: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1000&auto=format&fit=crop',
     images: [
-        'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1000&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1000&auto=format&fit=crop&crop=faces'
+        'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Traditional woven silk saree with zari border. Soft fabric with a rich look, ideal for weddings.'
   },
@@ -84,8 +80,7 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     image: 'https://images.unsplash.com/photo-1571513722275-4b41940f54b8?q=80&w=1000&auto=format&fit=crop',
     images: [
         'https://images.unsplash.com/photo-1571513722275-4b41940f54b8?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1571513722275-4b41940f54b8?q=80&w=1000&auto=format&fit=crop&crop=top',
-        'https://images.unsplash.com/photo-1621786040851-419b6748281a?q=80&w=1000&auto=format&fit=crop'
+        'https://images.unsplash.com/photo-1518552722881-22929424d626?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Luxurious two-piece sleepwear set. Button-down top and elastic waist pants in silky smooth satin.'
   },
@@ -97,11 +92,10 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     subCategory: 'Lingerie & Nightwear',
     rating: 4.6,
     reviews: 980,
-    image: 'https://images.unsplash.com/photo-1594411130638-349f75a7c936?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1618151313441-bc79b11e5090?q=80&w=1000&auto=format&fit=crop',
     images: [
-        'https://images.unsplash.com/photo-1594411130638-349f75a7c936?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1621786040851-419b6748281a?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1594411130638-349f75a7c936?q=80&w=1000&auto=format&fit=crop&crop=entropy'
+        'https://images.unsplash.com/photo-1618151313441-bc79b11e5090?q=80&w=1000&auto=format&fit=crop',
+        'https://images.unsplash.com/photo-1594411130638-349f75a7c936?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Wireless comfort bralette with delicate lace details. Lightly lined for shape and support.'
   },
@@ -118,11 +112,10 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     subCategory: 'Western Wear',
     rating: 4.7,
     reviews: 55000,
-    image: 'https://images.unsplash.com/photo-1581655353564-df123a1eb820?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1000&auto=format&fit=crop',
     images: [
-        'https://images.unsplash.com/photo-1581655353564-df123a1eb820?q=80&w=1000&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1581655353564-df123a1eb820?q=80&w=1000&auto=format&fit=crop&crop=top'
+        'https://images.unsplash.com/photo-1581655353564-df123a1eb820?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Loose, light, and keeps you cool. UA Tech fabric is quick-drying, ultra-soft, and has a more natural feel.'
   },
@@ -134,11 +127,10 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     subCategory: 'Western Wear',
     rating: 4.6,
     reviews: 18900,
-    image: 'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=1000&auto=format&fit=crop',
     images: [
-        'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=1000&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=1000&auto=format&fit=crop&crop=bottom'
+        'https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'A work-ready pant with a tailored look and comfortable stretch. Features moisture-wicking technology.'
   },
@@ -150,11 +142,10 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     subCategory: 'Western Wear',
     rating: 4.5,
     reviews: 1200,
-    image: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1593032465175-d81f0f53d35c?q=80&w=1000&auto=format&fit=crop',
     images: [
-        'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1593032465175-d81f0f53d35c?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop&crop=faces'
+        'https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Refined wool-blend jacket with notched lapels. Pair with matching trousers for a sharp professional look.'
   },
@@ -171,11 +162,10 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     subCategory: 'Girls',
     rating: 4.8,
     reviews: 4500,
-    image: 'https://images.unsplash.com/photo-1621452773781-0f992fd1f5cb?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?q=80&w=1000&auto=format&fit=crop',
     images: [
-        'https://images.unsplash.com/photo-1621452773781-0f992fd1f5cb?q=80&w=1000&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1518831959646-742c3a14ebf7?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1621452773781-0f992fd1f5cb?q=80&w=1000&auto=format&fit=crop&crop=top'
+        'https://images.unsplash.com/photo-1621452773781-0f992fd1f5cb?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Twirl-worthy tulle dress with sequin details. Soft cotton lining ensures comfort for all-day play.'
   },
@@ -190,23 +180,9 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     image: 'https://images.unsplash.com/photo-1605395630663-7c707d72df9e?q=80&w=1000&auto=format&fit=crop',
     images: [
         'https://images.unsplash.com/photo-1605395630663-7c707d72df9e?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1605395630663-7c707d72df9e?q=80&w=1000&auto=format&fit=crop&crop=top',
-        'https://images.unsplash.com/photo-1605395630663-7c707d72df9e?q=80&w=1000&auto=format&fit=crop&crop=bottom'
+        'https://images.unsplash.com/photo-1605395630663-7c707d72df9e?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Matching hoodie and jogger set in soft fleece. Perfect for school or weekend adventures.'
-  },
-  // LOW RATING ITEM (To test Filter) - Should NOT appear in store
-  {
-    id: 'k-girl-bad',
-    name: 'Low Quality T-Shirt',
-    price: 5,
-    category: 'Kids',
-    subCategory: 'Girls',
-    rating: 2.1,
-    reviews: 50,
-    image: 'https://images.unsplash.com/photo-1621452773781-0f992fd1f5cb?q=80&w=1000&auto=format&fit=crop',
-    images: ['https://images.unsplash.com/photo-1621452773781-0f992fd1f5cb?q=80&w=1000&auto=format&fit=crop'],
-    description: 'Cheap fabric, shrinks after one wash.'
   },
 
   // =========================================================================
@@ -221,11 +197,10 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     subCategory: 'Boys',
     rating: 4.7,
     reviews: 8900,
-    image: 'https://images.unsplash.com/photo-1519238263496-6362d74c1123?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?q=80&w=1000&auto=format&fit=crop',
     images: [
-        'https://images.unsplash.com/photo-1519238263496-6362d74c1123?q=80&w=1000&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1596870230751-ebdfce98ec42?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1519238263496-6362d74c1123?q=80&w=1000&auto=format&fit=crop&crop=faces'
+        'https://images.unsplash.com/photo-1519238263496-6362d74c1123?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Classic pique polo shirt available in uniform-approved colors. Fade-resistant and durable.'
   },
@@ -240,8 +215,7 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     image: 'https://images.unsplash.com/photo-1519457431-44ccd64a579b?q=80&w=1000&auto=format&fit=crop',
     images: [
         'https://images.unsplash.com/photo-1519457431-44ccd64a579b?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1475178626620-a4d074967452?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1519457431-44ccd64a579b?q=80&w=1000&auto=format&fit=crop&crop=bottom'
+        'https://images.unsplash.com/photo-1475178626620-a4d074967452?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Rugged denim jeans with an adjustable waistband to grow with him. Reinforced knees for extra durability.'
   },
@@ -257,11 +231,10 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     subCategory: 'Jewelry',
     rating: 4.6,
     reviews: 62000,
-    image: 'https://images.unsplash.com/photo-1630019852942-f89202989a51?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=1000&auto=format&fit=crop',
     images: [
-        'https://images.unsplash.com/photo-1630019852942-f89202989a51?q=80&w=1000&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1630019852942-f89202989a51?q=80&w=1000&auto=format&fit=crop&crop=center'
+        'https://images.unsplash.com/photo-1630019852942-f89202989a51?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Lightweight chunky open hoops. Hypoallergenic and crafted for long-lasting wear without tarnishing.'
   },
@@ -273,14 +246,14 @@ export const RAW_SCRAPED_DATASET: Product[] = [
     subCategory: 'Bags',
     rating: 4.7,
     reviews: 11500,
-    image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000&auto=format&fit=crop',
+    image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?q=80&w=1000&auto=format&fit=crop',
     images: [
-        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000&auto=format&fit=crop',
         'https://images.unsplash.com/photo-1591561954557-26941169b49e?q=80&w=1000&auto=format&fit=crop',
-        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000&auto=format&fit=crop&crop=left'
+        'https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000&auto=format&fit=crop'
     ],
     description: 'Spacious everyday tote with a tassel detail. Large enough to fit a laptop and daily essentials.'
   }
 ];
 
-export const MOCK_GENERATED_IMAGE = 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=1000&auto=format&fit=crop';
+// Using the Purple Saree image as the mock result to match the demo scenario (Maroon + Purple -> Purple Result)
+export const MOCK_GENERATED_IMAGE = 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?q=80&w=1000&auto=format&fit=crop';

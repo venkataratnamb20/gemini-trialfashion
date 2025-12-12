@@ -1,11 +1,23 @@
 import React from 'react';
 import { ShoppingBag, Search, Menu } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useShop } from '../../context/ShopContext';
 
 export const Header: React.FC = () => {
   const { cart } = useShop();
   const cartCount = cart.reduce((acc, item) => acc + item.quantity, 0);
+  const location = useLocation();
+
+  const scrollToShop = (e: React.MouseEvent) => {
+    // If we are on home page, scroll. If not, normal navigation will handle it (if we linked to /#shop-section)
+    if (location.pathname === '/') {
+      e.preventDefault();
+      const element = document.getElementById('shop-section');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100">
@@ -21,9 +33,9 @@ export const Header: React.FC = () => {
           </div>
 
           <nav className="hidden md:flex space-x-8 text-sm font-medium uppercase tracking-widest text-gray-500">
-            <Link to="/" className="hover:text-black transition-colors">New Arrivals</Link>
-            <Link to="/" className="hover:text-black transition-colors">Clothing</Link>
-            <Link to="/" className="hover:text-black transition-colors">Accessories</Link>
+            <a href="/#shop-section" onClick={scrollToShop} className="hover:text-black transition-colors">New Arrivals</a>
+            <a href="/#shop-section" onClick={scrollToShop} className="hover:text-black transition-colors">Clothing</a>
+            <a href="/#shop-section" onClick={scrollToShop} className="hover:text-black transition-colors">Accessories</a>
             <Link to="/" className="hover:text-black transition-colors">Editorial</Link>
           </nav>
 

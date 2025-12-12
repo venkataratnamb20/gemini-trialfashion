@@ -1,3 +1,4 @@
+
 import { GoogleGenAI } from "@google/genai";
 import { MOCK_GENERATED_IMAGE } from "../constants";
 
@@ -5,11 +6,61 @@ import { MOCK_GENERATED_IMAGE } from "../constants";
 // likely already declared in the global scope.
 // We will cast window to any where necessary to access aistudio.
 
-interface ProductInput {
+export interface ProductInput {
   image: string; // Base64
   description: string;
   category?: string;
 }
+
+/**
+ * Helper to construct the robust prompt. 
+ * Exported for testing purposes.
+ */
+export const constructVTONPrompt = (products: ProductInput[]): string => {
+  let productDescriptions = '';
+  products.forEach((p, index) => {
+    const type = p.category ? `[Category: ${p.category}]` : '[Category: Apparel]';
+    productDescriptions += `\n   - Item ${index + 1} ${type}: ${p.description}`;
+  });
+
+  return `
+    ROLE: Expert Virtual Try-On (VTON) AI.
+    
+    TASK: Synthesize a photorealistic image of the "Target Person" (IMAGE_SUBJECT) wearing the "Apparel" (IMAGE_PRODUCTS).
+    
+    --------------------------------------------------------
+    CRITICAL INSTRUCTION - ANATOMY & ARTIFACT PREVENTION
+    --------------------------------------------------------
+    1. **SUBJECT IS HOLY**: The Target Person's body, pose, arms, hands, legs, and face must be preserved EXACTLY as they appear in IMAGE_SUBJECT. 
+       - DO NOT generate new limbs.
+       - DO NOT change the pose.
+       
+    2. **PRODUCT IMAGE IS "FABRIC ONLY"**: 
+       - The models/mannequins in IMAGE_PRODUCTS are strictly for displaying the cloth.
+       - **IGNORE** their hands, arms, faces, and skin. 
+       - **GHOST LIMB REMOVAL**: If the product model has a hand resting on the clothing (e.g., holding a saree pallu or a dress hem), YOU MUST REMOVE THAT HAND. Inpaint the missing fabric texture underneath it.
+       - **FAIL STATE**: If the output contains three hands or a disembodied hand floating on the cloth, the generation is a failure.
+       
+    3. **CLOTHING INTEGRATION & DRAPING**:
+       - **RE-DRAPE THE FABRIC**: Do not copy the rigid shape or folds from the product image. The product image often has folds specific to that model's pose (e.g., bent knee, hand on hip).
+       - **ADAPT TO TARGET**: You must simulate how this specific fabric (silk, cotton, denim) would hang on the TARGET PERSON'S pose.
+       - If the product image is a saree folded over a model's arm, but the target person's arm is straight, you must unfold the saree and let it fall naturally.
+       
+    --------------------------------------------------------
+    INPUTS
+    --------------------------------------------------------
+    IMAGE_SUBJECT: The user to dress.
+    IMAGE_PRODUCTS: The clothing to transfer.
+    
+    PRODUCT LIST:
+    ${productDescriptions}
+    
+    --------------------------------------------------------
+    OUTPUT
+    --------------------------------------------------------
+    Generate ONLY the final image. High resolution. Photorealistic.
+  `;
+};
 
 export const generateTryOn = async (userImageBase64: string, products: ProductInput[]): Promise<string> => {
   try {
@@ -40,54 +91,12 @@ export const generateTryOn = async (userImageBase64: string, products: ProductIn
     };
     
     // Dynamic Prompt Construction
-    let prompt = `
-      ACT AS: An Expert Professional Fashion Retoucher and Compositor.
-      
-      TASK: Perform a high-fidelity Virtual Try-On (VTON) where the "Subject" wears the "Apparel Items".
-      
-      INPUTS provided in order:
-      1. IMAGE_SUBJECT: The user photo (The Subject).
-      2. IMAGE_PRODUCTS: One or more product images to be worn.
-      
-      PRODUCT DETAILS:
-    `;
-    
-    products.forEach((p, index) => {
-      const type = p.category ? `[Type: ${p.category}]` : '[Type: Apparel/Accessory]';
-      prompt += `\n   - Item ${index + 1} ${type}: ${p.description}`;
-    });
-
-    prompt += `
-      
-      STRICT EXECUTION GUIDELINES:
-      
-      1. ***IDENTITY PRESERVATION (CRITICAL)***: 
-         - You MUST NOT generate a new face or body.
-         - You MUST strictly preserve the Subject's facial features, identity, expression, hair, skin tone, and body proportions exactly as they appear in IMAGE_SUBJECT.
-         - Do not change the Subject's pose or background.
-         
-      2. ***NO ARTIFACTS / NO GHOST LIMBS (EXTREMELY IMPORTANT)***:
-         - The IMAGE_PRODUCTS inputs often contain models, mannequins, or visible body parts (hands, arms, legs, necks).
-         - **YOU MUST COMPLETELY IGNORE** any body parts visible in the IMAGE_PRODUCTS.
-         - **ONLY TRANSFER THE CLOTHING ITEM ITSELF.**
-         - **DO NOT** copy hands, arms, or extra limbs from the product image to the subject image.
-         - If the product image shows a hand resting on the garment, **REMOVE THE HAND** in the generated output and reconstruct the fabric texture underneath it.
-         - The final image must ONLY show the Subject's original limbs. Do not add extra hands.
-         
-      3. ***REALISTIC SCALING & ANATOMY***:
-         - **Jewelry**: Scale earrings/necklaces to realistic human proportions. 
-         - **Clothing**: Warp the fabric to follow the curvature of the Subject's body. Account for gravity and tension folds.
-         
-      4. ***COMPOSITION***:
-         - Maintain the exact framing of IMAGE_SUBJECT. Do not crop the head or feet if they are visible.
-         
-      GENERATE: A single, photorealistic output image of the Subject wearing the items.
-    `;
+    const prompt = constructVTONPrompt(products);
 
     // Construct request parts
     const parts: any[] = [{ text: prompt }];
 
-    // Add User Image (Subject)
+    // Add User Image (Subject) - ALWAYS FIRST
     parts.push({
       inlineData: {
         mimeType: 'image/jpeg',
@@ -149,6 +158,7 @@ export const generateTryOn = async (userImageBase64: string, products: ProductIn
   }
 
   // --- MOCK FALLBACK ---
+  // In a real scenario, we might show an error, but for this demo we fallback.
   await new Promise(resolve => setTimeout(resolve, 3000));
   return MOCK_GENERATED_IMAGE;
 };
