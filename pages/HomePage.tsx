@@ -8,7 +8,7 @@ import { useShop } from '../context/ShopContext';
 import { Button } from '../components/ui/Button';
 import { Product, VTONStage } from '../types';
 
-const CATEGORIES = ['All', 'Women', 'Men', 'Kids', 'Accessories'];
+const CATEGORIES = ['All', 'Women', 'Men', 'Accessories'];
 
 // Demo Images for Animation loop in Hero
 const DEMO_SCENARIOS = [

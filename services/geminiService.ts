@@ -18,17 +18,11 @@ export interface ProductInput {
  */
 export const constructVTONPrompt = (products: ProductInput[]): string => {
   let productDescriptions = '';
-  let isKidsMode = false;
 
   products.forEach((p, index) => {
     const category = p.category || 'Apparel';
     const type = `[Category: ${category}]`;
     productDescriptions += `\n   - Item ${index + 1} ${type}: ${p.description}`;
-
-    // Detect if we are dealing with kids fashion to apply special safety rails
-    if (['Kids', 'Girls', 'Boys', 'Baby', 'Toddler'].some(k => category.includes(k))) {
-      isKidsMode = true;
-    }
   });
 
   return `
@@ -60,14 +54,6 @@ export const constructVTONPrompt = (products: ProductInput[]): string => {
     3. **COMPOSITION**:
        - The final image must contain **ONLY ONE** person (The Target Model).
        - Background should be neutral or identical to IMAGE_SUBJECT.
-       
-       ${isKidsMode ? `
-       - **SPECIAL INSTRUCTION: JUNIOR FASHION**: 
-         - The Target Model is a junior model. 
-         - Scale the clothing appropriately to fit their smaller frame proportions.
-         - **STRICT SAFETY**: Ensure the final image is wholesome, professional, and suitable for a general audience catalog.
-         - **SINGLE SUBJECT**: Ensure no other figures from the product image appear in the result.` 
-       : ''}
 
     --------------------------------------------------------
     PRODUCT LIST:

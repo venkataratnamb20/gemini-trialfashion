@@ -3,7 +3,7 @@ export interface Product {
   id: string;
   name: string;
   price: number;
-  category: string; // e.g., 'Women', 'Men', 'Kids'
+  category: string; // e.g., 'Women', 'Men'
   subCategory?: string; // e.g., 'Western Wear', 'Ethnic Wear', 'Shoes'
   image: string; // Main display image
   images?: string[]; // All scraped images for gallery

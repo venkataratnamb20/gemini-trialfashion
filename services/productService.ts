@@ -20,9 +20,7 @@ export const ProductService = {
     // 1. Define Target URLs (from requirements)
     const targets = [
       { url: 'https://www.amazon.com/s?i=fashion-womens...', category: 'Women' },
-      { url: 'https://www.amazon.com/s?i=fashion-mens...', category: 'Men' },
-      { url: 'https://www.amazon.com/s?i=fashion-girls...', category: 'Kids' }, // Girls mapped to Kids
-      { url: 'https://www.amazon.com/s?i=fashion-boys...', category: 'Kids' }  // Boys mapped to Kids
+      { url: 'https://www.amazon.com/s?i=fashion-mens...', category: 'Men' }
     ];
 
     // Simulate network delay for scraping

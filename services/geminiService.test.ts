@@ -84,23 +84,6 @@ describe('Gemini VTON Service', () => {
       expect(prompt).toContain('Item 1 [Category: Top]: Shirt');
       expect(prompt).toContain('Item 2 [Category: Bottom]: Jeans');
     });
-
-    it('should activate JUNIOR FASHION instructions for children categories', () => {
-        const products: ProductInput[] = [
-            { image: 'b1', description: 'Kids Dress', category: 'Kids' }
-        ];
-        const prompt = constructVTONPrompt(products);
-        expect(prompt).toContain('SPECIAL INSTRUCTION: JUNIOR FASHION');
-        expect(prompt).toContain('smaller frame proportions');
-    });
-
-    it('should activate JUNIOR FASHION for Girls subcategory', () => {
-        const products: ProductInput[] = [
-            { image: 'b1', description: 'Party Dress', category: 'Girls' }
-        ];
-        const prompt = constructVTONPrompt(products);
-        expect(prompt).toContain('SPECIAL INSTRUCTION: JUNIOR FASHION');
-    });
   });
 
   describe('generateTryOn API Interaction', () => {
