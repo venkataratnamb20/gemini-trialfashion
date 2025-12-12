@@ -15,8 +15,8 @@ export const Header: React.FC = () => {
             <button className="p-2 -ml-2 mr-2 md:hidden">
               <Menu className="w-6 h-6" />
             </button>
-            <Link to="/" className="text-2xl font-serif font-bold tracking-tighter">
-              LUMIÈRE
+            <Link to="/" className="text-2xl font-serif font-bold tracking-tighter uppercase">
+              Trial Fashion
             </Link>
           </div>
 

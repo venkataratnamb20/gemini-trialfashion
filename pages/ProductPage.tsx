@@ -1,10 +1,11 @@
+
 import React, { useMemo, useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Star, MapPin, Lock, Sparkles, ChevronDown, Share2, Upload, Maximize2, Camera, Truck, RotateCcw, ShieldCheck } from 'lucide-react';
-import { MOCK_PRODUCTS } from '../constants';
+import { ArrowLeft, Star, MapPin, Lock, Sparkles, ChevronDown, Share2, Upload, Maximize2, Camera, Truck, RotateCcw, ShieldCheck, Loader2 } from 'lucide-react';
+import { ProductService } from '../services/productService'; // Use Service
 import { useShop } from '../context/ShopContext';
 import { Button } from '../components/ui/Button';
-import { VTONStage } from '../types';
+import { VTONStage, Product } from '../types';
 
 export const ProductPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -24,32 +25,53 @@ export const ProductPage: React.FC = () => {
   
   const [activeThumb, setActiveThumb] = useState(0);
   const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const product = useMemo(() => MOCK_PRODUCTS.find(p => p.id === id), [id]);
   
+  // State for Async Data
+  const [product, setProduct] = useState<Product | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch Product Data
+  useEffect(() => {
+    const fetchProduct = async () => {
+        if (!id) return;
+        setLoading(true);
+        try {
+            const data = await ProductService.getProductById(id);
+            setProduct(data || null);
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setLoading(false);
+        }
+    };
+    fetchProduct();
+  }, [id]);
+
   const isSelected = product ? selectedProducts.some(p => p.id === product.id) : false;
 
-  // --- 1. Gallery Logic: Include Generated Images ---
+  // --- 1. Gallery Logic: Include Generated Images & Scraped Images ---
   const thumbnails = useMemo(() => {
     if (!product) return [];
     
-    const list = [];
+    const list: string[] = [];
 
     // 1. The User's Result (if exists) - Only real generated results
     if (vtonState.generatedImage) {
       list.push(vtonState.generatedImage);
     }
 
-    // 2. Original Product Image
-    list.push(product.image);
-
-    // 3. Additional Views (For this demo, we duplicate the product image to simulate a gallery)
-    list.push(product.image);
-    list.push(product.image);
-    list.push(product.image);
+    // 2. Scraped Product Images
+    if (product.images && product.images.length > 0) {
+      // Use the new scraped images array
+      list.push(...product.images);
+    } else {
+      // Fallback if no images array (backward compat)
+      list.push(product.image);
+      list.push(product.image); // Duplicates for UI effect if only 1 exists
+    }
     
-    // Cap at 5 images max
-    return list.slice(0, 5);
+    // Cap at 6 images max
+    return list.slice(0, 6);
   }, [product, vtonState.generatedImage]);
 
   // Reset active thumb if generated image changes
@@ -58,6 +80,14 @@ export const ProductPage: React.FC = () => {
         setActiveThumb(0);
     }
   }, [vtonState.generatedImage]);
+
+  if (loading) {
+     return (
+        <div className="h-screen flex items-center justify-center">
+            <Loader2 className="w-8 h-8 animate-spin text-gray-300" />
+        </div>
+     );
+  }
 
   if (!product) {
     return (

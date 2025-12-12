@@ -1,6 +1,6 @@
 {
-  "name": "LUMIÈRE | AI Virtual Try-On Store",
-  "description": "A high-end e-commerce experience featuring AI-powered virtual try-on technology using Google Gemini models.",
+  "name": "Trial Fashion",
+  "description": "Fashion store with virtual trial room - Try before you buy.",
   "requestFramePermissions": [
     "camera",
     "microphone"

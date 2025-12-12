@@ -22,8 +22,8 @@ const App: React.FC = () => {
           
           <footer className="bg-gray-50 border-t border-gray-200 py-12 mt-auto">
             <div className="max-w-7xl mx-auto px-4 text-center text-gray-400 text-sm">
-              <p className="font-serif italic text-lg mb-4 text-gray-900">LUMIÈRE</p>
-              <p>&copy; {new Date().getFullYear()} Lumière Fashion. Powered by Google Gemini.</p>
+              <p className="font-serif italic text-lg mb-4 text-gray-900">TRIAL FASHION</p>
+              <p>&copy; {new Date().getFullYear()} Trial Fashion. Powered by Google Gemini.</p>
             </div>
           </footer>
         </div>

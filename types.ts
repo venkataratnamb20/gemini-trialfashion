@@ -5,7 +5,8 @@ export interface Product {
   price: number;
   category: string; // e.g., 'Women', 'Men', 'Kids'
   subCategory?: string; // e.g., 'Western Wear', 'Ethnic Wear', 'Shoes'
-  image: string;
+  image: string; // Main display image
+  images?: string[]; // All scraped images for gallery
   description: string;
   rating?: number; // 1-5
   reviews?: number; // Count
